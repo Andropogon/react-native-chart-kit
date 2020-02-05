@@ -17,6 +17,7 @@ class StackedBarChart extends AbstractChart {
       : 0;
   };
 
+
   renderBars = config => {
     const {
       data,
@@ -28,7 +29,7 @@ class StackedBarChart extends AbstractChart {
       colors
     } = config;
     return data.map((x, i) => {
-      const barWidth = 32 * this.getBarPercentage();
+      const barWidth = 30 * this.getBarPercentage();
       const ret = [];
       let h = 0;
       let st = paddingTop;
@@ -39,7 +40,7 @@ class StackedBarChart extends AbstractChart {
           (paddingRight +
             (i * (width - paddingRight)) / data.length +
             barWidth / 2) *
-          0.7;
+          0.78;
         ret.push(
           <Rect
             key={Math.random()}
@@ -84,11 +85,11 @@ class StackedBarChart extends AbstractChart {
             fill={colors[i]}
             rx={8}
             ry={8}
-            x={width * 0.71}
+            x={width * 0.8}
             y={height * 0.7 - i * 50}
           />
           <Text
-            x={width * 0.78}
+            x={width * 0.84}
             y={height * 0.76 - i * 50}
             {...this.getPropsForLabels()}
           >
@@ -150,7 +151,7 @@ class StackedBarChart extends AbstractChart {
               ? this.renderHorizontalLabels({
                   ...config,
                   count: segments,
-                  data: [0, border],
+                  data: [0, 31],
                   paddingTop,
                   paddingRight,
                   decimalPlaces
@@ -162,7 +163,7 @@ class StackedBarChart extends AbstractChart {
               ? this.renderVerticalLabels({
                   ...config,
                   labels: data.labels,
-                  paddingRight: paddingRight + 28,
+                  paddingRight: paddingRight,
                   stackedBar: true,
                   paddingTop,
                   horizontalOffset: barWidth
@@ -176,7 +177,7 @@ class StackedBarChart extends AbstractChart {
               border,
               colors: this.props.data.barColors,
               paddingTop,
-              paddingRight: paddingRight + 20
+              paddingRight: paddingRight + 27
             })}
           </G>
           {this.renderLegend({
