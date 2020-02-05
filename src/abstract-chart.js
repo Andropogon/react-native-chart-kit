@@ -11,9 +11,9 @@ class AbstractChart extends Component {
     }
   };
 
-  calcBaseHeight = (data, height) => {
-    const min = Math.min(...data);
-    const max = Math.max(...data);
+  calcBaseHeightBar = (data, height) => {
+    const min = 0;
+    const max = 31;
     if (min >= 0 && max >= 0) {
       return height;
     } else if (min < 0 && max <= 0) {
@@ -159,7 +159,7 @@ class AbstractChart extends Component {
       paddingTop,
       horizontalOffset = 0,
       stackedBar = false,
-      verticalLabelRotation = 0,
+      verticalLabelRotation = 45,
       formatXLabel = xLabel => xLabel
     } = config;
     const {
@@ -170,7 +170,7 @@ class AbstractChart extends Component {
     const fontSize = 12;
     let fac = 1;
     if (stackedBar) {
-      fac = 0.71;
+      fac = 0.73;
     }
     return labels.map((label, i) => {
       if (hidePointsAtIndex.includes(i)) {
