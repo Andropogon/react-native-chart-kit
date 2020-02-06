@@ -103,7 +103,7 @@ class AbstractChart extends Component {
       paddingTop,
       paddingRight,
       horizontalLabelRotation = 0,
-      decimalPlaces = 2,
+      decimalPlaces = 0,
       formatYLabel = yLabel => yLabel
     } = config;
     const {
@@ -136,6 +136,7 @@ class AbstractChart extends Component {
           : (height * 3) / 4 - (basePosition / count) * i + paddingTop;
       return (
         <Text
+          style={{fontWeight: 'bold',}}
           rotation={horizontalLabelRotation}
           origin={`${x}, ${y}`}
           key={Math.random()}
@@ -172,18 +173,27 @@ class AbstractChart extends Component {
     if (stackedBar) {
       fac = 0.73;
     }
+    let x = 0
     return labels.map((label, i) => {
       if (hidePointsAtIndex.includes(i)) {
         return null;
       }
-      const x =
-        (((width - paddingRight) / labels.length) * i +
-          paddingRight +
-          horizontalOffset) *
-        fac;
+      if (stackedBar) {
+        x = (paddingRight/2 +
+          (i * (width - paddingRight)) / labels.length +
+          15 / 2) * //barWidth = 30 * 0.5
+        0.88;
+      } else {
+        x =
+          (((width - paddingRight) / labels.length) * i +
+            paddingRight +
+            horizontalOffset) *
+          fac;
+      }
       const y = (height * 3) / 4 + paddingTop + fontSize * 2 + xLabelsOffset;
       return (
         <Text
+          style={{fontWeight: 'bold',}}
           origin={`${x}, ${y}`}
           rotation={verticalLabelRotation}
           key={Math.random()}
