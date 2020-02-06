@@ -11,9 +11,9 @@ class AbstractChart extends Component {
     }
   };
 
-  calcBaseHeightBar = (data, height) => {
-    const min = 0;
-    const max = 31;
+  calcBaseHeight = (data, height) => {
+    const min = Math.min(...data);
+    const max = Math.max(...data);
     if (min >= 0 && max >= 0) {
       return height;
     } else if (min < 0 && max <= 0) {
