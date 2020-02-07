@@ -5,7 +5,7 @@ import PieChart from "./src/pie-chart";
 import ProgressChart from "./src/progress-chart";
 import ContributionGraph from "./src/contribution-graph";
 import StackedBarChart from "./src/stackedbar-chart";
-
+import StackedMonth31BarChart from "./src/stackedbar-month31-chart";
 export {
   AbstractChart,
   BarChart,
@@ -13,5 +13,6 @@ export {
   PieChart,
   ProgressChart,
   ContributionGraph,
-  StackedBarChart
+  StackedBarChart,
+  StackedMonth31BarChart
 };
