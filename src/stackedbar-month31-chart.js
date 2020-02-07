@@ -1,22 +1,21 @@
-import React from "react";
-import { View } from "react-native";
-import { Svg, Rect, G, Text } from "react-native-svg";
-import AbstractChart from "./abstract-chart";
+import React from 'react'
+import { View } from 'react-native'
+import { G, Rect, Svg, Text } from 'react-native-svg'
+import AbstractChart from './abstract-chart'
 
-const barWidth = 32;
+const barWidth = 32
 
 class StackedMonth31BarChart extends AbstractChart {
   getBarPercentage = () => {
-    const { barPercentage = 1 } = this.props.chartConfig;
-    return barPercentage;
-  };
+    const { barPercentage = 1 } = this.props.chartConfig
+    return barPercentage
+  }
 
   getBarRadius = (ret, x) => {
     return this.props.chartConfig.barRadius && ret.length === x.length - 1
       ? this.props.chartConfig.barRadius
-      : 0;
-  };
-
+      : 0
+  }
 
   renderBars = config => {
     const {
@@ -27,20 +26,20 @@ class StackedMonth31BarChart extends AbstractChart {
       paddingRight,
       border,
       colors
-    } = config;
+    } = config
     return data.map((x, i) => {
-      const barWidth = 30 * this.getBarPercentage();
-      const ret = [];
-      let h = 0;
-      let st = paddingTop;
+      const barWidth = 30 * this.getBarPercentage()
+      const ret = []
+      let h = 0
+      let st = paddingTop
       for (let z = 0; z < x.length; z++) {
-        h = (height - 55) * (x[z] / 34);
-        const y = (height / 4) * 3 - h + st ;
+        h = (height - 55) * (x[z] / 34)
+        const y = (height / 4) * 3 - h + st
         const xC =
-          (paddingRight/2 +
+          (paddingRight / 2 +
             (i * (width - paddingRight)) / data.length +
             barWidth / 2) *
-          0.88;
+          0.88
         ret.push(
           <Rect
             key={Math.random()}
@@ -52,30 +51,33 @@ class StackedMonth31BarChart extends AbstractChart {
             height={h}
             fill={colors[z]}
           />
-        );
+        )
         if (!this.props.hideLegend) {
-          ret.push(
-            <Text
-              key={Math.random()}
-              x={xC + 7 + barWidth / 2}
-              textAnchor="end"
-              y={h > 15 ? y + 15 : y + 7}
-              {...this.getPropsForLabels()}
-            >
-              {x[z]}
-            </Text>
-          );
+          if (x[z] > 1) {
+            ret.push(
+              <Text
+                style={{ fontSize: 2 }}
+                key={Math.random()}
+                x={x[z] > 9 ? (xC + 7 + barWidth / 2) : (xC + 4 + barWidth / 2)}
+                textAnchor="end"
+                y={h > 15 ? y + 14 : y + 5}
+                {...this.getPropsForLabels()}
+              >
+                {x[z]}
+              </Text>
+            )
+          }
         }
 
-        st -= h;
+        st -= h
       }
 
-      return ret;
-    });
-  };
+      return ret
+    })
+  }
 
   renderLegend = config => {
-    const { legend, colors, width, height } = config;
+    const { legend, colors, width, height } = config
     return legend.map((x, i) => {
       return (
         <G key={Math.random()}>
@@ -96,13 +98,13 @@ class StackedMonth31BarChart extends AbstractChart {
             {x}
           </Text>
         </G>
-      );
-    });
-  };
+      )
+    })
+  }
 
   render() {
-    const paddingTop = 15;
-    const paddingRight = 32;
+    const paddingTop = 15
+    const paddingRight = 32
     const {
       width,
       height,
@@ -112,17 +114,17 @@ class StackedMonth31BarChart extends AbstractChart {
       withVerticalLabels = true,
       segments = 4,
       decimalPlaces
-    } = this.props;
-    const { borderRadius = 0 } = style;
+    } = this.props
+    const { borderRadius = 0 } = style
     const config = {
       width,
       height
-    };
-    let border = 0;
+    }
+    let border = 0
     for (let i = 0; i < data.data.length; i++) {
-      const actual = data.data[i].reduce((pv, cv) => pv + cv, 0);
+      const actual = data.data[i].reduce((pv, cv) => pv + cv, 0)
       if (actual > border) {
-        border = actual;
+        border = actual
       }
     }
     return (
@@ -190,7 +192,8 @@ class StackedMonth31BarChart extends AbstractChart {
           })}
         </Svg>
       </View>
-    );
+    )
   }
 }
-export default StackedMonth31BarChart;
+
+export default StackedMonth31BarChart
