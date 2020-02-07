@@ -33,7 +33,7 @@ class StackedMonth31BarChart extends AbstractChart {
       let h = 0
       let st = paddingTop
       for (let z = 0; z < x.length; z++) {
-        h = (height - 55) * (x[z] / 34)
+        h = (height - 55) * (x[z] / 35)
         const y = (height / 4) * 3 - h + st
         const xC =
           (paddingRight / 2 +
